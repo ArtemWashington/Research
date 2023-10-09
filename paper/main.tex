@@ -16,22 +16,19 @@
 
 
 
-\title{A template for the \emph{arxiv} style}
+\title{Автоматический подбор гиперпараметров моделей машинного обучения}
 
-\author{ David S.~Hippocampus\thanks{Use footnote for providing further
-		information about author (webpage, alternative
-		address)---\emph{not} for acknowledging funding agencies.} \\
-	Department of Computer Science\\
-	Cranberry-Lemon University\\
-	Pittsburgh, PA 15213 \\
-	\texttt{hippo@cs.cranberry-lemon.edu} \\
+\author{ Надршена Вероника Рафиковна  \\
+	МГУ им. М.В. Ломоносова\\
+	ф-т ВМК, кафедра ММП\\
+	% Pittsburgh, PA 15213 \\
+	\texttt{s02190794@gse.cs.msu.ru} \\
 	%% examples of more authors
 	\And
-	Elias D.~Striatum \\
-	Department of Electrical Engineering\\
-	Mount-Sheikh University\\
-	Santa Narimana, Levand \\
-	\texttt{stariate@ee.mount-sheikh.edu} \\
+	д.ф-м.н. Китов Виктор Владимирович\\
+	МГУ им. М.В. Ломоносова\\
+	ф-т ВМК, кафедра ММП\\
+	% Santa Narimana, Levand \\
 	%% \AND
 	%% Coauthor \\
 	%% Affiliation \\
@@ -56,7 +53,7 @@
 %%% Once the PDF is generated, you can check the metadata with
 %%% $ pdfinfo template.pdf
 \hypersetup{
-pdftitle={A template for the arxiv style},
+pdftitle={Методы верификации для кластеризации временных рядов},
 pdfsubject={q-bio.NC, q-bio.QM},
 pdfauthor={David S.~Hippocampus, Elias D.~Striatum},
 pdfkeywords={First keyword, Second keyword, More},
@@ -66,15 +63,37 @@ pdfkeywords={First keyword, Second keyword, More},
 \maketitle
 
 \begin{abstract}
-	\lipsum[1]
+	В данной работе рассматривается задача автоматического подбора гиперпараметров для моделей машинного обучения. Традиционные методы ручного выбора или простого перебора гиперпараметров (Grid Search) часто оказываются трудоемкими и не всегда приводят к наилучшим результатам. В связи с этим возникает необходимость в исследовании и применении более продвинутых методов автоматической оптимизации гиперпараметров.
+
+    Целью работы является изучение, анализ и сравнение современных методов автоматического подбора гиперпараметров, таких как Random Search, байесовская оптимизация и эволюционные алгоритмы, и определение их применимости и эффективности в различных задачах машинного обучения.
 \end{abstract}
 
 
-\keywords{First keyword \and Second keyword \and More}
+\keywords{Grid Search \and Random Search \and байeсовская оптимизация}
 
-\section{Introduction}
-\lipsum[2]
-\lipsum[3]
+\section{Введение}
+В области машинного обучения процесс создания оптимальной модели часто включает в себя настройку гиперпараметров, что является критически важным этапом для достижения высокой производительности алгоритма. Гиперпараметры, в отличие от параметров модели, не обучаются непосредственно в процессе обучения, но они могут существенно влиять на качество итоговой модели. Например, коэффициент обучения, количество скрытых слоев в нейронной сети или параметры регуляризации — это лишь некоторые из гиперпараметров, которые нужно правильно выбрать.
+
+Традиционные методы настройки гиперпараметров, такие как ручной подбор или сеточный поиск, могут быть трудоемкими и неэффективными, особенно при наличии большого числа гиперпараметров или при необходимости оптимизации сложных моделей \citep{bergstra2012}. В связи с этим автоматический подбор гиперпараметров становится все более популярным, так как он предлагает методы, способные автоматически и эффективно исследовать пространство гиперпараметров и находить оптимальные комбинации.
+
+Алгоритмы автоматического подбора гиперпараметров, такие как байесовская оптимизация, генетические алгоритмы или градиентный подбор, показали свою эффективность в ряде исследований \citep{snoek2012, thornton2013}. Благодаря этому они стали неотъемлемой частью современных систем машинного обучения.
+
+Однако, несмотря на прогресс в этой области, существует множество открытых вопросов и проблем. Основные трудности заключаются в масштабируемости алгоритмов, выборе подходящего метода для конкретной задачи или проблемах связанных со стабильностью и интерпретируемостью результатов.
+
+В целом, автоматический подбор гиперпараметров продолжает оставаться актуальной и важной областью исследований в мире машинного обучения, и многие исследователи и практики постоянно ищут новые и улучшенные методы решения этой задачи.
+
+\section{Постановка задачи}
+Рассмотрим множество моделей машинного обучения \( \mathcal{M} \). Для каждой модели \( m \in \mathcal{M} \) определим пространство гиперпараметров как \( \mathcal{H}_m \). Пусть \( L: \mathcal{M} \times \mathcal{H}_m \rightarrow \mathbb{R} \) представляет функцию потерь, которая оценивает качество соответствующей модели на заданном наборе данных при определенной комбинации гиперпараметров.
+
+Задача автоматического подбора гиперпараметров может быть сформулирована следующим образом:
+
+\[
+(m^*, h^*) = \arg\min_{m \in \mathcal{M}, h_m \in \mathcal{H}_m} L(m, h_m).
+\]
+
+Цель состоит в том, чтобы найти такие \( m^* \) и \( h^* \), при которых функция потерь достигает минимального значения. Традиционные методы, такие как сеточный поиск, могут быть неэффективными в ситуациях с большим пространством гиперпараметров~\citep{bergstra2012}. С другой стороны, более современные методы, такие как байесовская оптимизация или эволюционные алгоритмы, предоставляют перспективные подходы к решению этой задачи~\citep{snoek2012, thornton2013}.
+
+
 
 \section{Headings: first level}
 \label{sec:headings}
@@ -104,7 +123,7 @@ Citations use \verb+natbib+. The documentation may be found at
 	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
 \end{center}
 
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
+Here is an example usage of the two main commands (\verb+citept+ and \verb+citepp+): Some people thought a thing \citepp{kour2014real, hadash2018estimate} but other people thought something else \citepp{kour2014fast}. Many people have speculated that if we knew exactly why \citept{kour2014fast} thought this\dots
 
 \subsection{Figures}
 \lipsum[10]
