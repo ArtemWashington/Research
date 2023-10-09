@@ -9,7 +9,6 @@
 | 7 | Bergstra, J., Bardenet, R., Bengio, Y., & Kégl, B. (2011). Algorithms for Hyper-parameter optimization. | [link](https://papers.nips.cc/paper/2011/hash/86e8f7ab32cfd12577bc2619bc635690-Abstract.html) |
 | 8 | Eggensperger, K., Feurer, M., Hutter, F., Bergstra, J., Snoek, J., Hoos, H., & Leyton-Brown, K. (2013). Towards an empirical foundation for assessing Bayesian optimization of hyperparameters. | [link](https://www.tuebingen.mpg.de/fileadmin/user_upload/files/publication_pdf_file/file/43d0e3c7e6d7a5c9_PUBPDF_Eggensperger-2013-Towards-an-empirical-foundation-for-assessing-Bayesian-optimization-of-hyperparameters.pdf) |
 | 9 | Shahriari, B., Swersky, K., Wang, Z., Adams, R. P., & de Freitas, N. (2016). Taking the human out of the loop: A review of Bayesian optimization. | [link](https://www.pnas.org/content/112/29/8728) |
-
 | 10 | Falkner, S., Klein, A., & Hutter, F. (2018). BOHB: Robust and Efficient Hyperparameter Optimization at Scale. | [link](https://arxiv.org/abs/1807.01774) |
 | 11 | Probst, P., Bischl, B., & Boulesteix, A. L. (2019). Tunability: Importance of Hyperparameters of Machine Learning Algorithms. | [link](https://jmlr.org/papers/v20/18-444.html) |
 | 12 | Klein, A., Falkner, S., Mansur, N., & Hutter, F. (2017). ROBO: A flexible and robust Bayesian optimization framework. | [link](https://arxiv.org/abs/1705.03565) |
