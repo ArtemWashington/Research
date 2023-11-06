@@ -96,81 +96,100 @@ pdfkeywords={First keyword, Second keyword, More},
 
 
 
-\section{Headings: first level}
-\label{sec:headings}
+\section{Цель эксперимента}
+Цель вычислительного эксперимента заключается в оптимизации гиперпараметров классификатора метода опорных векторов (SVM), применяемого к набору данных Wisconsin Diagnostic Breast Cancer (WDBC), полученного из OpenML. Набор данных состоит из диагностических измерений для случаев рака груди. Эксперимент включает использование различных техник оптимизации гиперпараметров, включая поиск по сетке с RandomizedSearchCV, байесовский подход с Optuna и BayesSearchCV из scikit-optimize, для нахождения оптимального набора параметров, максимизирующих точность модели.
 
-\lipsum[4] See Section \ref{sec:headings}.
+\subsection{Описание набора данных}
+Набор данных, используемый в этом исследовании, - это широко используемый набор данных Wisconsin Diagnostic Breast Cancer (WDBC), полученный из репозитория OpenML. Этот набор данных включает диагностические измерения рака груди, каждый экземпляр представляет собой оцифрованное изображение мелкоигольной аспирационной биопсии (FNA) опухоли груди. Набор данных предоставляет характеристики, вычисленные на основе этих изображений, и использует их для классификации наблюдений как доброкачественные или злокачественные.
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
+Набор данных содержит 569 экземпляров, каждый из которых имеет 30 числовых характеристик, описывающих свойства ядер клеток, присутствующих на изображениях. Эти характеристики организованы следующим образом:
 
-\subsubsection{Headings: third level}
-\lipsum[6]
-
-\paragraph{Paragraph}
-\lipsum[7]
-
-
-
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
-
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-
-Here is an example usage of the two main commands (\verb+citept+ and \verb+citepp+): Some people thought a thing \citepp{kour2014real, hadash2018estimate} but other people thought something else \citepp{kour2014fast}. Many people have speculated that if we knew exactly why \citept{kour2014fast} thought this\dots
-
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\textwidth]{../figures/log_reg_cs_exp.eps}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-
-
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
-
-\subsection{Lists}
 \begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
+    \item Радиус (V1-V10): среднее расстояние от центра до точек на периметре.
+    \item Текстура (V11-V20): стандартное отклонение значений градаций серого.
+    \item Периметр (V21-V30): размер основной опухоли.
 \end{itemize}
 
+\begin{table}[h]
+\centering
+\caption{Пример набора данных WDBC}
+\label{table:data}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Index & V1    & V2    & V3    & V4     & V5     & V6     & V7     & V8     & V9     & V10    \\ \hline
+0     & 17.99 & 10.38 & 122.8 & 1001.0 & 0.1184 & 0.2776 & 0.3001 & 0.1471 & 0.2419 & 0.07871\\ \hline
+1     & 20.57 & 17.77 & 132.9 & 1326.0 & 0.08474& 0.07864& 0.0869 & 0.07017& 0.1812 & 0.05667\\ \hline
+2     & 19.69 & 21.25 & 130.0 & 1203.0 & 0.1096 & 0.1599 & 0.1974 & 0.1279 & 0.2069 & 0.05999\\ \hline
+3     & 11.42 & 20.38 & 77.58 & 386.1  & 0.1425 & 0.2839 & 0.2414 & 0.1052 & 0.2597 & 0.09744\\ \hline
+4     & 20.29 & 14.34 & 135.1 & 1297.0 & 0.1003 & 0.1328 & 0.198  & 0.1043 & 0.1809 & 0.05883\\ \hline
+\end{tabular}
+\end{table}
+
+Эти характеристики охватывают такие аспекты, как текстура, периметр, площадь, гладкость, плотность, вогнутость и симметрия ядер клеток, среди прочих.
+
+\begin{center}
+    \includegraphics[width=\textwidth]{figures/parameters.jpg}
+    \captionof{Примеры характеристик ядер клеток}
+\end{center}
+
+Для обеспечения воспроизводимости и целостности вычислительных экспериментов, набор данных случайным образом перемешивается с постоянным сидом. Затем он разделяется на обучающую выборку и тестовую выборку, при этом 40\% данных резервируются для тестирования с целью оценки производительности модели машинного обучения.
+
+Эксперимент спроектирован так, чтобы быть надежным и повторяемым, с использованием стратифицированной выборки для поддержания распределения целей бинарной классификации между обучающей и тестовой выборками. Такой подход гарантирует, что обе подвыборки будут представлять общий набор данных, что позволяет более надежно оценивать способность модели к обобщению.
+
+
+
+\subsection{Методология}
+Методология эксперимента сосредоточена на применении и оптимизации классификатора метода опорных векторов (SVM) для набора данных WDBC. Алгоритм SVM выбран за его эффективность в задачах бинарной классификации и способность обрабатывать данные высокой размерности.
+
+Оптимизация гиперпараметров SVM проводится с использованием трех различных стратегий:
+
+\begin{enumerate}
+\item \textbf{Случайный Поиск:} Выполняется случайный поиск по сетке с использованием RandomizedSearchCV из scikit-learn, исследуя заранее определенное пространство гиперпараметров. Эта стратегия поиска выбирает образцы из заданных распределений для гиперпараметров, таких как параметр регуляризации и тип ядра, обеспечивая базовый показатель производительности для настройки гиперпараметров.
+
+\item \textbf{Оптимизация Optuna:} Используется продвинутая рамка оптимизации гиперпараметров Optuna для проведения более интенсивного поиска. Для интеллектуального навигации по пространству гиперпараметров на основе производительности предыдущих испытаний используется семплер Tree-structured Parzen Estimator (TPE) от Optuna, стремясь найти оптимальную конфигурацию за меньшее количество итераций.
+
+\item \textbf{Байесовская Оптимизация:} Реализован BayesSearchCV из scikit-optimize для использования техник байесовской оптимизации. Этот подход моделирует пространство гиперпараметров с помощью гауссовского процесса и выбирает следующие гиперпараметры для оценки, балансируя между исследованием и использованием, стремясь минимизировать количество необходимых оценок.
+\end{enumerate}
+
+
+
+\subsection{Результаты}
+\begin{center}
+    \includegraphics[width=\textwidth]{figures/time.jpg}
+    \captionof{Время}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\textwidth]{figures/accuracy.jpg}
+    \captionof{Точность}
+\end{center}
+
+На этих графиках представлено сравнение трех различных методов оптимизации гиперпараметров, используемых для решения задачи машинного обучения: \texttt{RandomizedSearchCV}, \texttt{Optuna} и \texttt{BayesSearchCV}. На основе анализа представленных данных можно сделать несколько выводов:
+
+\subsubsection{Времязатратность:}
+\begin{itemize}
+  \item \texttt{Optuna} --- самый быстрый метод, на поиск оптимальных параметров уходит всего 48,981 секунды.
+  \item \texttt{RandomizedSearchCV} требует примерно в три раза больше времени, чем \texttt{Optuna}, и составляет 136,142 секунды.
+  \item \texttt{BayesSearchCV} --- самый медленный, его время составляет 282,650 секунды, что почти в шесть раз больше, чем у \texttt{Optuna}, и примерно в два раза больше, чем у \texttt{RandomizedSearchCV}.
+\end{itemize}
+
+\subsubsection{Точность:}
+\begin{itemize}
+  \item Наибольшая точность у \texttt{BayesSearchCV} --- 0,956.
+  \item Точность \texttt{Optuna} несколько ниже --- 0,952.
+  \item \texttt{RandomizedSearchCV} имеет наименьшую точность среди всех трех методов --- 0,947.
+\end{itemize}
+
+\subsubsection{Наилучшие найденные параметры:}
+Параметры, найденные каждым методом, отличаются, что свидетельствует о различных стратегиях поиска и достижении локального оптимума:
+\begin{itemize}
+  \item \texttt{RandomizedSearchCV} обнаружил высокое значение 'C' около 45,36, что говорит о меньшей силе регуляризации, а параметр 'kernel' установлен в значение 'linear'. В нем не используется параметр 'degree', так как он не имеет значения для линейного ядра, и задается значение 'gamma', которое также не используется линейными ядрами.
+  \item \texttt{Optuna} также выбрала "линейное" ядро, но с гораздо меньшим значением 'C', равным примерно 1,299, что говорит о другом предпочтении регуляризации.
+  \item \texttt{BayesSearchCV} выбрал "полиномиальное" ядро с чрезвычайно малым значением 'C' около 7,11e-08, "степенью" 2 для полиномиального ядра и "гаммой" около 1,566. Использование показателя "степень" здесь уместно, поскольку он характерен именно для ядра "poly".
+\end{itemize}
+
+\subsubsection{Выводы:}
+Существует четкий компромисс между скоростью и точностью. Если \texttt{Optuna} является самой быстрой, то \texttt{BayesSearchCV}, несмотря на то, что она самая медленная, достигает самой высокой точности. Все методы выбрали различные гиперпараметры, что свидетельствует о том, что они по-разному исследуют пространство параметров. Различия в результатах также отражают лежащие в основе этих методов стратегии оптимизации. При выборе метода оптимизации необходимо учитывать специфические потребности своего приложения.
 
 \bibliographystyle{unsrtnat}
 \bibliography{references}
